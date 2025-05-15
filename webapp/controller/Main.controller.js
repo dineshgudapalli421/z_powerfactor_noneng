@@ -1,4 +1,5 @@
 sap.ui.define([
+    "sap/ui/core/mvc/Controller",
     "sap/ui/model/odata/v2/ODataModel",
     'sap/ui/model/Filter',
     'sap/ui/model/FilterOperator',
