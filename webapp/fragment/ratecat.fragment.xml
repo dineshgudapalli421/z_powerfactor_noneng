@@ -1,0 +1,14 @@
+<core:FragmentDefinition
+xmlns="sap.ui.comp.valuehelpdialog"
+xmlns:core="sap.ui.core">
+<ValueHelpDialog 
+        title="Rate Category"
+        ok=".onRateCateVHOkPress"
+        cancel=".onRateCateVHCancelPress"
+        key="RateCategory"
+        descriptionKey="RateCategory"
+        afterClose=".onRateCateVHAfterClose"
+        supportRanges="true"
+        supportRangesOnly="true"
+        />
+</core:FragmentDefinition>

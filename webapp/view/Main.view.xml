@@ -1,0 +1,96 @@
+<mvc:View controllerName="com.sap.lh.mr.zpowerfactornoneng.controller.Main"
+   xmlns:vh="sap.ui.mdc.filterbar.vh" xmlns:smartfield="sap.ui.comp.smartfield"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    displayBlock="true"
+    xmlns:f="sap.f" 
+    xmlns:mdc="sap.ui.mdc"
+    xmlns:core="sap.ui.core" xmlns:fb="sap.ui.comp.filterbar">
+    <f:DynamicPage id="dynamicPageId"
+            class="sapUiNoContentPadding"
+            toggleHeaderOnTitleClick="{/titleClickable}">
+            <f:header>
+            <f:DynamicPageHeader>
+        <f:content>
+            <fb:FilterBar
+                id="filterbar"
+                persistencyKey="myPersKey"
+                useToolbar="false"
+                search=".onSearch"
+                filterChange=".onFilterChange"
+                afterVariantLoad=".onAfterVariantLoad"
+                filterContainerWidth="13rem"
+                header="inLog" showClearOnFB="false"
+                class="sapUiSmallMarginBottom"
+            >
+              <fb:filterGroupItems>                                            
+                                <fb:FilterGroupItem name="RateCategory" 
+                                label="Rate Category" 
+                                groupName="Group1" 
+                                visibleInFilterBar="true" mandatory="false">
+                                    <fb:control>
+                                        <MultiInput id="idRateCategory"
+                                        valueHelpIconSrc="sap-icon://value-help" 
+                                        value="{filters>/idRateCategory}"
+                                        width="60%" 
+                                        valueHelpRequest="onRateCateVHRequest"/>                                        
+                                    </fb:control>
+                                </fb:FilterGroupItem>
+                                <fb:FilterGroupItem name="Installation"
+                                label="Installation" 
+                                groupName="Group1" 
+                                visibleInFilterBar="true" mandatory="false">
+                                    <fb:control>                                        
+                                        <MultiInput id="idInstallation"
+                                        valueHelpIconSrc="sap-icon://value-help" 
+                                        value="{filters>/idInstallation}"
+                                        width="60%" 
+                                        valueHelpRequest="onInstallVHRequested"/>                                        
+                                    </fb:control>
+                                </fb:FilterGroupItem>   
+                                <fb:FilterGroupItem 
+                                        name="Period " 
+                                        label="Period" 
+                                        groupName="Group1" 
+                                        visibleInFilterBar="true">
+                                            <fb:control>                                                
+                                           <DateRangeSelection
+                                                id="billingPeriodRange"
+                                                width="90%"
+                                                displayFormat="MM-yyyy"
+                                                valueFormat="yyyy-MM-dd"
+                                                change="onBillingPeriodRangeChange"
+                                                placeholder="MM-YYYY to MM-YYYY" />
+                                                                                    
+                                            </fb:control>
+                                            </fb:FilterGroupItem>  
+                                         <fb:FilterGroupItem name="PFDeviation" 
+                                label="PF Deviation" 
+                                groupName="Group1" 
+                                visibleInFilterBar="true" mandatory="false">
+                                    <fb:control>
+                                        <Input
+                                         id="idPFDeviation" 
+                                         width="90%"  
+                                         showValueHelp="false"
+                                         value="25"
+                                        >
+                                        </Input>
+                                    </fb:control>
+                                </fb:FilterGroupItem>                                    
+                               
+                            </fb:filterGroupItems>
+                        
+            </fb:FilterBar>
+        </f:content>
+        
+    </f:DynamicPageHeader>
+            </f:header>
+            <f:content>
+        <core:Fragment
+                fragmentName="com.sap.lh.mr.zpowerfactornoneng.fragment.items"  
+                type="XML"
+            />
+     </f:content>
+    </f:DynamicPage>
+</mvc:View>

@@ -1,0 +1,15 @@
+<core:FragmentDefinition
+xmlns="sap.ui.comp.valuehelpdialog"
+xmlns:core="sap.ui.core">
+<ValueHelpDialog 
+        title="Installation"
+        ok=".onInstallVHOkPress"
+        cancel=".onInstallVHCancelPress"
+        key="Installation"
+        descriptionKey="Installation"
+        afterClose=".onInstallVHAfterClose"
+        supportRanges="true"
+        supportRangesOnly="true"
+        />
+</core:FragmentDefinition>
+
