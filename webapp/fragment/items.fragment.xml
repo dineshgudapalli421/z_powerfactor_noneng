@@ -63,13 +63,13 @@ xmlns="sap.ui.table"
                             <m:Text text="{NonEngModel>Installation}"/>
                         </template>
                     </Column>
-                    <Column
+                    <!-- <Column
                         width="11rem">
                         <m:Label text="Billing Period" textAlign="Center" width="100%"/>
                         <template>
                             <m:Text text="{NonEngModel>BillingPeriod}"/>
                         </template>
-                    </Column>
+                    </Column> -->
                     <Column
                         width="11rem">
                         <m:Label text="Start Date" textAlign="Center" width="100%"/>
