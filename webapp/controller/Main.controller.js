@@ -20,16 +20,16 @@ sap.ui.define([
             }), "ui");
         },
         onSearch: function () {
-            const oView = this.getView();            
+            const oView = this.getView();
             var aFilter = [];
-            
+
             var aTokensRateCategory = this.getView().byId("idRateCategory").getTokens();
             var idRateCategoryFrm = "";
             if (aTokensRateCategory.length === 0) {
                 idRateCategoryFrm = this.getView().byId("idRateCategory").getValue();
                 if (idRateCategoryFrm !== "") {
                     aFilter.push(new Filter("RateCategory", FilterOperator.EQ, idRateCategoryFrm));
-                }                
+                }
             }
             else if (aTokensRateCategory.length === 1) {
                 idRateCategoryFrm = aTokensRateCategory[0].getText();
@@ -53,11 +53,11 @@ sap.ui.define([
                     aFilter.push(new Filter("RateCategory", FilterOperator.EQ, idRateCategoryFrm));
                 }
             }
-            
-            
+
+
             var aTokensInstallation = this.getView().byId("idInstallation").getTokens();
             var installation = "";
-            if (aTokensInstallation.length === 0) {                
+            if (aTokensInstallation.length === 0) {
                 installation = this.getView().byId("idInstallation").getValue();
                 if (installation !== "") {
                     aFilter.push(new Filter("Installation", FilterOperator.EQ, installation));
@@ -85,8 +85,7 @@ sap.ui.define([
                     aFilter.push(new Filter("Installation", FilterOperator.EQ, installation));
                 }
             }
-            if(aTokensRateCategory.length === 0 && aTokensInstallation.length === 0 && idRateCategoryFrm === "" && installation === "")
-            {
+            if (aTokensRateCategory.length === 0 && aTokensInstallation.length === 0 && idRateCategoryFrm === "" && installation === "") {
                 return MessageBox.error("Either Rate category or Installation is mandatory...");
             }
             var oDateRangeSelection = this.getView().byId("billingPeriodRange");
@@ -99,17 +98,17 @@ sap.ui.define([
                 var endMonth = (oEndDate.getMonth() + 1).toString().padStart(2, '0');
                 var endYear = oEndDate.getFullYear().toString();
             }
-            else{
+            else {
                 return MessageBox.error("Period is mandatory...");
             }
 
             var pfDeviation = this.getView().byId("idPFDeviation").getValue();
-            
+
             // Filter for the selected range (from start month-year to end month-year)
             aFilter.push(new Filter("BillingPeriodMonth", FilterOperator.BT, startMonth, endMonth));
             aFilter.push(new Filter("BillingPeriodYear", FilterOperator.BT, startYear, endYear));
             aFilter.push(new Filter("Deviation", FilterOperator.EQ, pfDeviation));
-            
+
             var oModel = this.getOwnerComponent().getModel();
             var oJsonModel = new sap.ui.model.json.JSONModel();
             var oBusyDialog = new sap.m.BusyDialog({
@@ -123,12 +122,19 @@ sap.ui.define([
                 success: function (response) {
                     debugger;
                     oBusyDialog.close();
-                    if(response.results.length>0)
-                    {
+                    if (installation !== "" && response.results.length > 0) {
+                        oJsonModel.setData(response.results);
+                        oView.byId("tblPowerFactor").setModel(oJsonModel, "NonEngModel");                        
+                        const errorMessage = oJsonModel.oData[0].error_message;
+                        if (errorMessage !== "") {
+                            return MessageBox.error(errorMessage);
+                        }
+                    }
+                    if (installation === "" && response.results.length > 0) {
                         oJsonModel.setData(response.results);
                         oView.byId("tblPowerFactor").setModel(oJsonModel, "NonEngModel");
                     }
-                    else if(response.results.length === 0){
+                    else if (response.results.length === 0) {
                         oJsonModel.setData({});
                         oView.byId("tblPowerFactor").setModel(oJsonModel, "NonEngModel");
                         return MessageBox.error("There are no records..");
@@ -168,7 +174,7 @@ sap.ui.define([
         onRateCateVHAfterClose: function () {
             this._oRateCategoryDialog.destroy();
         },
-        onInstallVHRequested:function(){
+        onInstallVHRequested: function () {
             this._oInstallationMultiInput = this.byId("idInstallation");
             this.loadFragment({
                 name: "com.sap.lh.mr.zpowerfactornoneng.fragment.installation"
