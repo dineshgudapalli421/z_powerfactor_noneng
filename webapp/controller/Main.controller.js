@@ -20,7 +20,6 @@ sap.ui.define([
             }), "ui");
         },
         onSearch: function () {
-            debugger;
             const oView = this.getView();            
             var aFilter = [];
             
@@ -30,8 +29,7 @@ sap.ui.define([
                 idRateCategoryFrm = this.getView().byId("idRateCategory").getValue();
                 if (idRateCategoryFrm !== "") {
                     aFilter.push(new Filter("RateCategory", FilterOperator.EQ, idRateCategoryFrm));
-                }
-                
+                }                
             }
             else if (aTokensRateCategory.length === 1) {
                 idRateCategoryFrm = aTokensRateCategory[0].getText();
@@ -131,6 +129,8 @@ sap.ui.define([
                         oView.byId("tblPowerFactor").setModel(oJsonModel, "NonEngModel");
                     }
                     else if(response.results.length === 0){
+                        oJsonModel.setData({});
+                        oView.byId("tblPowerFactor").setModel(oJsonModel, "NonEngModel");
                         return MessageBox.error("There are no records..");
                     }
                 },

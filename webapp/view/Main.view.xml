@@ -57,7 +57,7 @@
                                            <DateRangeSelection
                                                 id="billingPeriodRange"
                                                 width="90%"
-                                                displayFormat="MM-yyyy"
+                                                displayFormat="MMM-yyyy"
                                                 valueFormat="yyyy-MM-dd"
                                                 change="onBillingPeriodRangeChange"
                                                 placeholder="MM-YYYY to MM-YYYY" />
