@@ -125,7 +125,7 @@ sap.ui.define([
                     if (installation !== "" && response.results.length > 0) {
                         oJsonModel.setData(response.results);
                         oView.byId("tblPowerFactor").setModel(oJsonModel, "NonEngModel");                        
-                        const errorMessage = oJsonModel.oData[0].error_message;
+                        const errorMessage = response.results[0].ErrorMessage;
                         if (errorMessage !== "") {
                             return MessageBox.error(errorMessage);
                         }
